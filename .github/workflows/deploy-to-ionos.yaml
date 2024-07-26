@@ -25,6 +25,9 @@ on:
 
 concurrency: ${{ github.ref }}
 
+env:
+  DEPLOYMENT_FOLDER: .output/public
+
 jobs:
   deploy-to-ionos:
     if: ${{ github.event_name == 'workflow_dispatch' }}
