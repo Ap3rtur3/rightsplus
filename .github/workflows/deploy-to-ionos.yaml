@@ -25,8 +25,8 @@ on:
 
 concurrency: ${{ github.ref }}
 
-env:
-  DEPLOYMENT_FOLDER: .output/public
+#env:
+#  DEPLOYMENT_FOLDER: .output/public
 
 jobs:
   deploy-to-ionos:
@@ -70,23 +70,23 @@ jobs:
           deployment-id: ${{ matrix.deployment-id }}
           action: retrieve-info
 
-      - name: Render templates
-        uses: ionos-deploy-now/template-renderer-action@v2
-        id: template
-        with:
-          input-directory: .deploy-now/rightsplus
-          output-directory: ${{ env.DEPLOYMENT_FOLDER }}
-          intermediate-data-file: ${{ env.DEPLOYMENT_FOLDER }}/.template-renderer-data
-
       #- name: Render templates
       #  uses: ionos-deploy-now/template-renderer-action@v2
       #  id: template
       #  with:
-      #    deployment-id: ${{ matrix.deployment-id }}
-      #    data: "[${{ steps.deployment.outputs.template-variables }}, ${{ toJson(secrets) }}]"
-      #    input-directory: deployment
-      #    output-directory: deployment
-      #    intermediate-data-file: deployment/.template-renderer-data
+      #    input-directory: .deploy-now/rightsplus
+      #    output-directory: ${{ env.DEPLOYMENT_FOLDER }}
+      #    intermediate-data-file: ${{ env.DEPLOYMENT_FOLDER }}/.template-renderer-data
+
+      - name: Render templates
+        uses: ionos-deploy-now/template-renderer-action@v2
+        id: template
+        with:
+          deployment-id: ${{ matrix.deployment-id }}
+          data: "[${{ steps.deployment.outputs.template-variables }}, ${{ toJson(secrets) }}]"
+          input-directory: deployment
+          output-directory: deployment
+          intermediate-data-file: deployment/.template-renderer-data
 
       - name: Render real site-url to all files
         run: |
