@@ -1,0 +1,13 @@
+RewriteEngine On
+
+RewriteCond %{HTTP:Accept-Language} ^en [NC]
+RewriteRule ^$ https://%{HTTP_HOST}/en/ [L,R=302]
+
+RewriteCond %{HTTP:Accept-Language} ^es [NC]
+RewriteRule ^$ https://%{HTTP_HOST}/es/ [L,R=302]
+
+RewriteCond %{HTTP:Accept-Language} ^fr [NC]
+RewriteRule ^$ https://%{HTTP_HOST}/fr/ [L,R=302]
+
+RewriteCond %{HTTP:Accept-Language} ^de [NC]
+RewriteRule ^$ https://%{HTTP_HOST}/de/ [L,R=302]
